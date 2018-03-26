@@ -1,3 +1,3 @@
 #!/bin/sh
 
-supervisord --nodaemon --configuration="/etc/supervisord.conf" --loglevel=info
+exec supervisord --nodaemon --configuration="/etc/supervisord.conf" --loglevel=info

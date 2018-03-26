@@ -1,9 +1,9 @@
-ARG FROM_BASE=base_container:20180311
+ARG FROM_BASE=base_container:20180325
 FROM $FROM_BASE
 
 # name and version of this docker image
 ARG CONTAINER_NAME=supervisord
-ARG CONTAINER_VERSION=1.0.0
+ARG CONTAINER_VERSION=1.0.7
 
 LABEL org_name=$CONTAINER_NAME \
       version=$CONTAINER_VERSION 

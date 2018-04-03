@@ -1,0 +1,11 @@
+
+declare -A www=()
+
+declare w_uid=${www_uid:-82}
+declare w_gid=${www_gid:-82}
+
+www['user']=${www_user:-www-data}
+www['uid']=${w_uid:-$(getent passwd "${www['user']}" | cut -d: -f3)}
+www['group']=${www_group:-www-data}
+www['gid']=${w_gid:-$(getent group "${www['user']}" | cut -d: -f3)}
+www['shell']=/sbin/nologin

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+declare -ar env_www=(
+    'WORKING_DIR="${WWW}"'
+    'WWW="${WWW:-/var/www}"'
+    'WWW_UID="${WWW_UID:-$(www.UID)}'
+    'WWW_GID="${WWW_GID:-$(www.GID)}'
+)
+
+lib.updateRuntimeEnvironment "${env_www[*]}" 
+
+lib.copyFileToRuntime 'LIB' 'www.bashlib'

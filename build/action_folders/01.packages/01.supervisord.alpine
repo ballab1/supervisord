@@ -1,7 +1,3 @@
 # supervisord Packages
 
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    declare PKGS='supervisor'
-    package.checkIfInstalled "$PKGS"
-    apk add --no-cache $PKGS
-fi
+declare -a PKGS=( supervisor )

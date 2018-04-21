@@ -1,7 +1,0 @@
-# supervisord Packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    declare PKGS='supervisor fcgiwrap'
-    package.checkIfInstalled "$PKGS"
-    apk add --no-cache $PKGS
-fi

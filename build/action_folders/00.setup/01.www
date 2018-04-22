@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 declare -ar env_www=(
     'WWW="${WWW:-/var/www}"'
     'WWW_UID="${WWW_UID:-$(www.UID)}"'
@@ -7,6 +8,8 @@ declare -ar env_www=(
     'WORKING_DIR="${WWW}"'
 )
 
-lib.updateRuntimeEnvironment "${env_www[*]}" 
+#remove WORKING_DIR so it comes after WWW
+crf.removeFromRuntimeEnvironment 'WORKING_DIR' 
+crf.updateRuntimeEnvironment "${env_www[*]}" 
 
-lib.copyFileToRuntime 'LIB' 'www.bashlib'
+crf.copyFileToRuntime 'LIB' 'www.bashlib'

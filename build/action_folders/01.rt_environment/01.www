@@ -1,0 +1,16 @@
+#!/bin/bash
+
+declare -ar env_www=(
+    'WWW_USER="${WWW_USER:-www-data}"'
+    'WWW_UID="${WWW_UID:-$(www.UID "$WWW_USER")}"'
+    'WWW_GROUP="${WWW_GROUP:-www-data}"'
+    'WWW_GID="${WWW_GID:-$(www.GID "WWW_GROUP")}"'
+    'WWW="${WWW:-/var/www}"'
+    'WORKDIR="${WWW}"'
+    'USER="${WWW_UID}"'
+)
+
+#remove WORKDIR so it comes after WWW
+crf.removeFromRuntimeEnvironment 'WORKDIR' 
+crf.removeFromRuntimeEnvironment 'USER' 
+crf.updateRuntimeEnvironment "${env_www[@]}" 

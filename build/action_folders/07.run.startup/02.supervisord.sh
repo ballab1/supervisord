@@ -13,3 +13,5 @@ if [ -e /etc/supervisord.conf ]; then
     term.log "    supervisord available on http://${CONTAINER_NAME}:9001\n"
 
 fi
+
+crf.fixupDirectory "$WWW" "$WWW_UID"

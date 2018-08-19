@@ -29,12 +29,19 @@ if [ -d "$cbf_dir" ]; then
     echo "Using local build version of CBF"
 
 elif [ "$CBF_VERSION" ]; then
-    echo "Downloading CBF:$CBF_VERSION from github"
+    echo "Downloading CBF:$CBF_VERSION from $CBF_URL"
 
     # since no CBF directory located, attempt to download CBF based on specified verion
     CBF_TGZ=/tmp/cbf.tar.gz
     CBF_URL="https://github.com/ballab1/container_build_framework/archive/${CBF_VERSION}.tar.gz"
     wget --no-check-certificate --quiet --output-document="$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
+    if type -f wget &> /dev/null ; then
+        wget --no-check-certificate --quiet --output-document="$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
+    elif type -f curl &> /dev/null ; then
+        curl --insecure --silent --output "$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
+    else
+        die "Neither wget or curl is installed to download cbf from $CBF_URL"
+    fi
 
     echo 'Unpacking downloaded copy of CBF'
     tar -xzf "$CBF_TGZ" || die "Failed to unpack $CBF_TGZ"

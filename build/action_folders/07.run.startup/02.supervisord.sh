@@ -2,10 +2,11 @@
 
 if [ -e /etc/supervisord.conf ]; then
     : ${SUPERVISORD_USER:?"Environment variable 'SUPERVISORD_USER' not defined in '${BASH_SOURCE[0]}'"}
+    [ "${SUPERVISORD_PASS:-}" ] || lib.file_env 'SUPERVISORD_PASS'
     : ${SUPERVISORD_PASS:?"Environment variable 'SUPERVISORD_PASS' not defined in '${BASH_SOURCE[0]}'"}
 
     declare -r cnf_file=/etc/supervisord.conf
-    term.log "    updating username,password,chown and serverurl in '${cnf_file}'\n" 'white' 
+    term.log "    updating username,password,chown and serverurl in '${cnf_file}'\n" 'white'
     sed -Ei \
         -e "s|^username=.*$|username=${SUPERVISORD_USER}|" \
         -e "s|^password=.*$|password=${SUPERVISORD_PASS}|" \

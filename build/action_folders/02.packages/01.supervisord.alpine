@@ -1,0 +1,3 @@
+# supervisord Packages
+
+declare -a PKGS=( supervisor )
